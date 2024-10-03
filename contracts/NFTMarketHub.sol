@@ -54,7 +54,10 @@ contract NFTMarketHub is ERC721URIStorage, Ownable, ReentrancyGuard {
     }
 
     function withdrawFunds() external onlyOwner {
-        uint256 balance = address(this).balance;
-        payable(owner()).transfer(balance);
-    }
+    uint256 balance = address(this).balance;
+    require(balance > 0, "No funds to withdraw");
+    (bool success, ) = payable(owner()).call{value: balance}("");
+    require(success, "Transfer failed");
+    emit MarketplaceEvents.FundsWithdrawn(owner(), balance);
+}
 }

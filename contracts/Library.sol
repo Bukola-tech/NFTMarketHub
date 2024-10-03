@@ -14,6 +14,8 @@ library MarketplaceEvents {
     event NFTListed(uint256 indexed tokenId, uint256 price);
     event NFTSold(uint256 indexed tokenId, address indexed buyer, uint256 price);
     event NFTDelisted(uint256 indexed tokenId);
+    event FundsWithdrawn(address indexed owner, uint256 amount);
+
 }
 
 library MarketplaceLib {
